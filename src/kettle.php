@@ -1360,17 +1360,19 @@ class ORM
     {
         if (!isset(self::$_client[$connection_name])) {
             $params = self::getConfig(null, $connection_name);
-
+            /*
             if (self::getConfig('key', $connection_name) && self::getConfig('secret', $connection_name)) {
                 $params['credentials'] = new Credentials(
                     self::getConfig('key', $connection_name), self::getConfig('secret', $connection_name)
                 );
             }
+            */
             if (self::getConfig('base_url', $connection_name)) {
                 $params['endpoint'] = self::getConfig('base_url', $connection_name);
             }
 
-            $client                          = new DynamoDbClient($params);
+            //$client                          = new DynamoDbClient($params);
+            $client                          =  DynamoDbClient::factory($params); 
             self::$_client[$connection_name] = $client;
         }
     }
